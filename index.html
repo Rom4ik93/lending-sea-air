@@ -1,0 +1,671 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ресторан "Морской Ветер" - черноморская кухня в Сочи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2a6e85;
+            --light-blue: #a3c9d9;
+            --beige: #f5f1e8;
+            --white: #ffffff;
+            --dark: #1a3a4f;
+            --accent: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--beige);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .book-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Герой-баннер */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Общие стили секций */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 50px;
+        }
+
+        /* О нас */
+        .about {
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            background-color: #ddd;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        /* Меню */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-image {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-info {
+            padding: 20px;
+        }
+
+        .menu-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .menu-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .menu-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Галерея */
+        .gallery {
+            background-color: var(--light-blue);
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            background-color: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Бронирование */
+        .booking-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+        }
+
+        /* Контакты */
+        .contact {
+            background-color: var(--light-blue);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-bottom: 20px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+        }
+
+        .social-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .map {
+            height: 300px;
+            background-color: #ddd;
+            border-radius: 10px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 0;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .book-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-slide {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <svg viewBox="0 0 100 100">
+                    <path d="M50 15 L75 40 L65 50 L75 60 L50 85 L25 60 L35 50 L25 40 Z" fill="#2a6e85"/>
+                </svg>
+                Морской Ветер
+            </div>
+            <button class="book-btn" onclick="scrollToBooking()">Забронировать стол</button>
+        </div>
+    </header>
+
+    <!-- Герой-баннер -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Черноморская кухня в Сочи</h1>
+            <p>Настоящие морские вкусы и уютная атмосфера на берегу Черного моря</p>
+            <button class="book-btn" onclick="scrollToBooking()">Забронировать столик</button>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Добро пожаловать в "Морской Ветер"</h3>
+                    <p>Наш ресторан расположен в живописном месте Сочи с видом на Черное море. Мы предлагаем аутентичные блюда черноморской кухни, приготовленные из свежих морепродуктов и местных продуктов.</p>
+                    <p>Уютная атмосфера, профессиональное обслуживание и неповторимые вкусы — всё это делает нас любимым местом для встреч с друзьями и семьей.</p>
+                </div>
+                <div class="about-image">
+                    <p>Фото: Кухня / Шеф-повар</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Меню -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Наше меню</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Рыба на гриле</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Свежая рыба на гриле</h3>
+                        <p>Семга, лосось или тунец, приготовленные на гриле с травами</p>
+                        <div class="menu-price">650 ₽</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Мидии по-гречески</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Мидии по-гречески</h3>
+                        <p>Свежие мидии в белом вине с чесноком и зеленью</p>
+                        <div class="menu-price">520 ₽</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Оливье с морепродуктами</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Оливье с морепродуктами</h3>
+                        <p>Классический салат с добавлением креветок и кальмаров</p>
+                        <div class="menu-price">380 ₽</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Виноград с орехами</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Виноград с орехами</h3>
+                        <p>Сочный виноград с грецкими орехами и медом</p>
+                        <div class="menu-price">280 ₽</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Лимонный десерт</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Лимонный десерт</h3>
+                        <p>Освежающий лимонный тарт с мятой</p>
+                        <div class="menu-price">220 ₽</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <p>Фото: Морской салат</p>
+                    </div>
+                    <div class="menu-info">
+                        <h3>Морской салат</h3>
+                        <p>Смесь морских водорослей с овощами и оливковым маслом</p>
+                        <div class="menu-price">350 ₽</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Фотогалерея</h2>
+            <div class="gallery-container">
+                <div class="gallery-slider" id="gallerySlider">
+                    <div class="gallery-slide">
+                        <p>Фото: Стол с блюдами</p>
+                    </div>
+                    <div class="gallery-slide">
+                        <p>Фото: Закат над морем</p>
+                    </div>
+                    <div class="gallery-slide">
+                        <p>Фото: Кухня ресторана</p>
+                    </div>
+                    <div class="gallery-slide">
+                        <p>Фото: Люди за столом</p>
+                    </div>
+                </div>
+                <div class="gallery-nav">
+                    <button class="nav-btn" onclick="changeSlide(-1)">‹</button>
+                    <button class="nav-btn" onclick="changeSlide(1)">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Бронирование -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2 class="section-title">Забронировать стол</h2>
+            <div class="booking-form">
+                <form id="reservationForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Дата</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Время</label>
+                            <input type="time" id="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Количество гостей</label>
+                            <select id="guests" required>
+                                <option value="">Выберите количество</option>
+                                <option value="1">1 человек</option>
+                                <option value="2">2 человека</option>
+                                <option value="3">3 человека</option>
+                                <option value="4">4 человека</option>
+                                <option value="5">5 человек</option>
+                                <option value="6">6 человек</option>
+                                <option value="7">7 человек</option>
+                                <option value="8">8 человек</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить запрос</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <div class="contact-details">
+                        <p><strong>Адрес:</strong> г. Сочи, ул. Морская, 42</p>
+                        <p><strong>Телефон:</strong> +7 (862) 262-22-22</p>
+                        <p><strong>Время работы:</strong> Ежедневно с 11:00 до 23:00</p>
+                    </div>
+                    <div class="social-btns">
+                        <button class="social-btn" onclick="openWhatsApp()">WhatsApp</button>
+                        <button class="social-btn" onclick="openTelegram()">Telegram</button>
+                    </div>
+                </div>
+                <div class="map">
+                    <p>Карта местоположения</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Текущий слайд галереи
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        const totalSlides = slides.length;
+
+        // Функция изменения слайда
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            
+            const slider = document.getElementById('gallerySlider');
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Автоматическая смена слайдов каждые 5 секунд
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Плавная прокрутка к бронированию
+        function scrollToBooking() {
+            document.getElementById('booking').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Обработка формы бронирования
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const guests = document.getElementById('guests').value;
+            
+            const message = `Здравствуйте! Я хочу забронировать столик в "Морской Ветер".%0A%0AИмя: ${name}%0AТелефон: ${phone}%0AДата: ${date}%0AВремя: ${time}%0AКоличество гостей: ${guests}`;
+            
+            // Открываем WhatsApp с сообщением
+            window.open(`https://wa.me/78622622222?text=${message}`, '_blank');
+        });
+
+        // Функции для социальных кнопок
+        function openWhatsApp() {
+            window.open('https://wa.me/78622622222', '_blank');
+        }
+
+        function openTelegram() {
+            window.open('https://t.me/morskoy_veter', '_blank');
+        }
+
+        // Анимация при прокрутке
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.menu-item, .about-content > *, .gallery-container');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Инициализация анимации элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.menu-item, .about-content > *, .gallery-container');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+</html>
